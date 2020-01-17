@@ -1,3 +1,103 @@
 page-home {
+   
+    .item-md.item-block .item-inner {
+        padding-right: 2px;
+    }
 
+    .place{
+        display: inline-block;
+        background: #37B9D3;
+        color: white;
+        text-align: center;
+        height: 100%;
+        width: 75px;
+        min-width: 60px;
+        max-width: 25%;
+        margin: 0 !important;
+        margin-right: 10px !important;
+        position: relative;
+    }
+
+    .place p.title{
+        position: absolute;
+        top: 15%;
+        vertical-align: middle;
+        color: white;
+        font: bold 2.8rem roboto;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .place p.sub-title{
+        position: absolute;
+        top: 58%;
+        font : italic normal 1rem roboto;
+        color: white;
+        padding-left: 8px;
+    }
+
+    .item-md .item-button {
+        padding: 0 1.1em 0 0.1em;
+        height: 62px;
+        font-size: 3.1rem;
+        text-align: justify;
+    }
+
+    .distance-info{
+        position: absolute;
+        top: 34px;
+        left: 15px;
+        color : #FFF;
+        font-size: 1.1rem;
+    }
+
+    ion-badge {
+        padding: 3px 3px;
+    }
+
+    .item-md h2 {
+        font-size: 1.8rem;
+        color: #D35137,
+    }
+
+    .status-info {
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .address-info {
+        font-size: 1.2rem !important;
+    }
+
+    .navbar-title {
+        text-transform: uppercase;
+        
+    }
+
+    .toolbar-title{
+        color: #D35137;
+    }
+
+    .parking-p{
+        color: #FFF;
+        font-size: 4rem;
+    }
+
+    .no-data-card{
+        position: absolute;
+        top: 30%;
+        border-color: transparent;
+        border-top-color: #37B9D3;
+        border-width: 3px;
+        border-style: solid;
+    }
+
+    .no-data-card h1{
+        color: #D35137;
+    }
+
+    .no-data-card p{
+        white-space: normal !important;
+        padding-top: 1rem;
+    }
 }
