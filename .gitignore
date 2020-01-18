@@ -34,6 +34,7 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 
-# apk
-*.apk
-*.keystore
+
+.keystore
+.apk
+captures/
