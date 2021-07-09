@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="navbar-title" text-center ><span class="parking-p"> V</span>{{ headerTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="parking-list" *ngIf="networkAvailable && parkings.length > 0">
+    <ion-card *ngFor="let item of parkings">
+        <ion-item (click)="showDirection(item)">
+          <ion-avatar class="place" slot="start">
+            <p>{{ item.availablePlaces }}</p>
+          </ion-avatar>
+          <ion-label>
+            <h2 class="ion-text-wrap">{{ item.name }}</h2>
+            <p class="place-available">{{ item.address }}</p>
+          </ion-label>
+          <ion-note class="distance" color="warning" slot="end">{{ item.computedDistance | unitConverter }}</ion-note>
+        </ion-item>
+    </ion-card>
+  </div>
+
+  <!-- Skeleton screen -->
+  <div *ngIf="parkings.length == 0">
+    <ion-list>
+      <ion-item *ngFor="let i of [1,2,3,4,5]">
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-card class="no-data-card" *ngIf="!networkAvailable">
+      <ion-item text-center>
+        <p>Vérifier votre connexion internet et activer votre position GPS...</p>
+        <ion-spinner color="secondary" name="lines"></ion-spinner>
+      </ion-item>
+  
+      <ion-item>
+        <ion-button slot="end" size="small" fill="clear" expand="full" color="secondary" (click)="loadParkings()">
+          Actualiser<ion-icon name="refresh"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card>
+
+</ion-content>

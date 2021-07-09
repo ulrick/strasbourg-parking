@@ -1,0 +1,9 @@
+.toast-card > div{
+    position: absolute;
+    top: 25%;
+    border-color: transparent;
+    border-top-color: var(--ion-color-secondary);
+    border-width: 3px;
+    border-style: solid;
+    background: #fff !important;
+  }

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Strasbourg Parking</string>
+    <string name="title_activity_main">Strasbourg Parking</string>
+    <string name="package_name">com.manasse_yawo.parkinglocation</string>
+    <string name="custom_url_scheme">com.manasse_yawo.parkinglocation</string>
+</resources>

@@ -1,0 +1,13 @@
+{
+  "appId": "com.manasse_yawo.parkinglocation",
+  "appName": "Strasbourg Parking",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1
+    }
+  },
+  "cordova": {}
+}

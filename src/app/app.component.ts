@@ -1,23 +1,18 @@
+import { Platform } from '@ionic/angular';
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { Plugins } from '@capacitor/core';
 
-//import { TabsPage } from '../pages/tabs/tabs';
-import { HomePage } from '../pages/home/home';
-import { StatusBar } from '@ionic-native/status-bar';
+const { App } = Plugins;
 
 @Component({
-  templateUrl: 'app.html'
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss'],
 })
-export class MyApp {
-  rootPage:any = HomePage;
-
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.backgroundColorByHexString('#D35137');
-      splashScreen.hide();
-    });
+export class AppComponent {
+  constructor(private platform: Platform) {
+    this.platform.backButton.subscribeWithPriority(1, () => {
+      App.exitApp();
+    })
   }
 }

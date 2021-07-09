@@ -1,8 +1,7 @@
 {
   "name": "parkinglocation",
   "integrations": {
-    "cordova": {}
+    "capacitor": {}
   },
-  "type": "ionic-angular",
-  "app_id": ""
+  "type": "angular"
 }

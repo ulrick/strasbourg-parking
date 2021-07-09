@@ -1,0 +1,60 @@
+.place{
+  background: var(--ion-color-secondary);
+  text-align: center;
+  color: white;
+  font-weight: 550;
+  width: 50px;
+  height: 50px;
+}
+
+.place-available {
+  font-size: 12px; 
+}
+
+h2 {
+  font-size: 1.06rem;
+  color: var(--ion-color-danger),
+}
+
+.navbar-title {
+  text-transform: uppercase;
+  background: var(--ion-color-secondary);
+  color: #FFF;
+  text-align: center;
+}
+
+.parking-p{
+  color: #FFF;
+  font-size: 4rem;
+}
+
+.no-data-card{
+  position: absolute;
+  top: 25%;
+  border-color: transparent;
+  border-top-color: var(--ion-color-secondary);
+  border-width: 3px;
+  border-style: solid;
+  background-color: #fff;
+}
+
+.no-data-card p{
+  white-space: normal !important;
+  padding-top: 1rem;
+  color: var(--ion-color-danger);
+}
+
+.distance {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.toast-card > div{
+  position: absolute;
+  top: 25%;
+  border-color: transparent;
+  border-top-color: var(--ion-color-secondary);
+  border-width: 3px;
+  border-style: solid;
+  background-color: #fff !important;;
+}
