@@ -24,6 +24,7 @@ export class CarParkingComponent extends ParkingBase implements OnInit, OnDestro
   private parkingStatuses: ParkingLocation[] = [];
   private parkingLocations: ParkingLocation[] = [];
   parkings: ParkingLocation[] = [];
+  headerTitle: string;
   
   private _unsubscribe = new Subject<void>();
 
@@ -53,6 +54,9 @@ export class CarParkingComponent extends ParkingBase implements OnInit, OnDestro
       const parkingLocations = this._route.snapshot.data['parkingLocation'];
       this.parkingLocations = mapParkingLocation(parkingLocations);
       this._titleService.setTitle('Opened Car Parkings');
+
+      this.headerTitle = 'arkings ouverts';
+      this.letterStartTitle = 'P';
     }
   }
 

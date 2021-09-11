@@ -17,6 +17,7 @@ export abstract class ParkingBase {
     networkAvailable = true;
     disconnectSubscription;
     connectSubscription;
+    letterStartTitle: string;
 
     constructor(
         protected _parkingService: ParkingService,

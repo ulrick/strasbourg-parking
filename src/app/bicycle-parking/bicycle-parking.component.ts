@@ -56,7 +56,8 @@ export class BicycleParkingComponent extends ParkingBase implements OnInit {
       const parkingLocations = this._route.snapshot.data['parkingLocation'];
       this.bicycleParkings = mapBicycleParkings(parkingLocations);
       this._titleService.setTitle('Bicycle Parkings');
-      this.headerTitle = 'élos disponibles'
+      this.headerTitle = 'élos disponibles';
+      this.letterStartTitle = 'V';
     }
   }
 

@@ -16,15 +16,17 @@ h2 {
   color: var(--ion-color-danger),
 }
 
+ion-toolbar {
+  --background: var(--ion-color-secondary);
+  color: #FFF;
+}
+
 .navbar-title {
   text-transform: uppercase;
-  background: var(--ion-color-secondary);
-  color: #FFF;
   text-align: center;
 }
 
 .parking-p{
-  color: #FFF;
   font-size: 4rem;
 }
 

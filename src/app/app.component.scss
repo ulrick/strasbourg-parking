@@ -7,3 +7,8 @@
     border-style: solid;
     background: #fff !important;
   }
+
+  ion-toolbar {
+    --background: var(--ion-color-secondary);
+    color: #FFF;
+  }

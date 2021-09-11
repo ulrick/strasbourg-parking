@@ -8,7 +8,9 @@ import { IonicModule } from '@ionic/angular';
 
 
 @NgModule({
-  declarations: [BicycleParkingComponent],
+  declarations: [
+    BicycleParkingComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,

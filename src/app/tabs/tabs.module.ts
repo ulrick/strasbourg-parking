@@ -7,6 +7,7 @@ import { TabsRoutingModule } from './tabs-routing.module';
 
 import { TabsComponent } from './tabs.component';
 import { BicycleParkingModule } from '../bicycle-parking/bicycle-parking.module';
+import { CarParkingModule } from '../car-parking/car-parking.module';
 
 @NgModule({
   imports: [
@@ -14,8 +15,9 @@ import { BicycleParkingModule } from '../bicycle-parking/bicycle-parking.module'
     CommonModule,
     FormsModule,
     TabsRoutingModule,
-    BicycleParkingModule
   ],
-  declarations: [TabsComponent]
+  declarations: [
+    TabsComponent,
+  ]
 })
 export class TabsModule {}

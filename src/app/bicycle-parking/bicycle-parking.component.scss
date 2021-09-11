@@ -15,11 +15,14 @@
     font-size: 1.06rem;
     color: var(--ion-color-danger),
   }
+
+  ion-toolbar {
+    --background: var(--ion-color-secondary);
+    color: #FFF;
+  }
   
   .navbar-title {
     text-transform: uppercase;
-    background: var(--ion-color-secondary);
-    color: #FFF;
     text-align: center;
   }
   
