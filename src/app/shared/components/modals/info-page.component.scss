@@ -1,0 +1,48 @@
+.info-main-content {
+    --background: linear-gradient(120deg, rgb(43, 148, 169), rgb(55, 185, 211));
+    --color: rgb(255, 255, 255) !important;
+}
+
+.close-btn {
+    width: 100%;
+    text-align: end;
+    margin-bottom: 40px;
+
+    .button {
+        --background: transparent;
+        --color: rgb(255, 255, 255) !important;
+    }
+}
+
+.info-content {
+    margin-top: 50px;
+}
+
+.info-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: white;
+    font-size:17px;
+}
+
+.info-text {
+    color: #ffffff;
+    margin: 10px;
+}
+
+.sub-title {
+    color: #ffc409;
+    text-decoration: none;
+    font-size: 1.15rem;
+    margin: 0;
+    padding-top: 10px;
+}
+
+a {
+    color: #EA5244;
+    font-style: italic;
+}
+
+

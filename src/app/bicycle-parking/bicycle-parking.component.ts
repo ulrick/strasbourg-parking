@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
-import { Observable, Subject, timer } from 'rxjs';
+import { Subject, timer } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
 import { ParkingLocation } from '@shared/entities';
 import { ParkingService } from '@shared/services';
 import { mapBicycleParkings } from '@shared/utils/mapper';
 import { Spherical } from '@shared/utils';
-import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { ParkingBase } from '@shared/components';
 import { Network } from '@ionic-native/network/ngx';
 

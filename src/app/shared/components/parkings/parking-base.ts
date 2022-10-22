@@ -1,10 +1,11 @@
 import { Geolocation, GeolocationOptions } from "@ionic-native/geolocation/ngx";
 import { NativeGeocoder, NativeGeocoderResult } from "@ionic-native/native-geocoder/ngx";
 import { Network } from "@ionic-native/network/ngx";
-import { ToastController } from "@ionic/angular";
+import { ModalController, ToastController } from "@ionic/angular";
 
 import { ParkingLocation } from "@shared/entities";
 import { ParkingService } from "@shared/services";
+import { InfoPageComponent } from "../modals/info-page.component";
 
 export abstract class ParkingBase {
     parkings: ParkingLocation[] = [];
@@ -24,7 +25,7 @@ export abstract class ParkingBase {
         protected _toastController: ToastController,
         protected _geolocation: Geolocation,
         protected _nativeGeocoder: NativeGeocoder,
-        protected _network: Network) {
+        protected _network: Network,) {
     }
 
     protected abstract loadParkings(): void;

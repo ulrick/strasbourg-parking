@@ -1,0 +1,31 @@
+<ion-content class="ion-padding info-main-content">
+    <section class="close-btn" slot="fixed">
+        <ion-button size="large" fill="clear" (click)="dismiss()">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
+    </section>
+    <section class="info-content">
+        <ion-text color="secondary">
+            <h3 class="info-title">
+                Les données affichées dans cette application proviennent des jeux de données mis à disposition par la ville de Strasbourg.
+                Elles sont mises à jour régulièrement.
+            </h3>
+
+            <p class="sub-title">PARKING</p>
+            <a href="https://data.strasbourg.eu/explore/embed/dataset/occupation-parkings-temps-reel/table/">
+                Occupation en temps réel des parkings
+            </a>
+            <p class="info-text">Les parkings affichés dans cette application sont ordonnés par ordre du plus proche de votre position actuelle.
+                ou de l'adresse renseignée dans le formulaire de recherche
+            </p>
+
+            <p class="sub-title">VELHOP</p>
+            <a href="https://data.strasbourg.eu/explore/embed/dataset/stations-velhop/table/?location=11,48.57116,7.77557&basemap=71944e">
+                Localisation et occupation des stations de vélos en libre-service
+            </a>
+            <p class="info-text">Les stations vélos affichées dans cette application sont ordonnées par ordre du plus proche de votre position actuelle par défaut,
+                ou de l'adresse renseignée dans le formulaire de recherche
+            </p>
+        </ion-text>
+    </section>
+</ion-content>
