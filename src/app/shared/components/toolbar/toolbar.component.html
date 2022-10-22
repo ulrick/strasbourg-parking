@@ -1,7 +1,7 @@
 <ion-toolbar>
     <ion-title class="navbar-title" text-center><span class="parking-p">{{ letterStartTitle }}</span>{{ headerTitle }}</ion-title>
     <ion-buttons slot="end">
-        <ion-button>
+        <ion-button (click)="presentModal()">
             <ion-icon size="large" name="alert-circle-outline"></ion-icon>
         </ion-button>
     </ion-buttons>

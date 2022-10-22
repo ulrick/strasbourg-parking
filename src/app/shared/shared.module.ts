@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ToolbarComponent } from './components';
+import { InfoPageComponent, ToolbarComponent } from './components';
 
 import { UnitConverterPipe } from './pipes';
 
@@ -25,7 +25,8 @@ export const MY_FORMATS = {
     ],
     declarations: [
         UnitConverterPipe,
-        ToolbarComponent
+        ToolbarComponent,
+        InfoPageComponent
     ],
     exports: [
         CommonModule,
@@ -34,7 +35,8 @@ export const MY_FORMATS = {
         RouterModule,
         HttpClientModule,
         UnitConverterPipe,
-        ToolbarComponent
+        ToolbarComponent,
+        InfoPageComponent,
     ]
 })
 export class SharedModule {

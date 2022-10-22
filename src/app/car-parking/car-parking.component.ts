@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 import { Subject, timer } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
@@ -35,7 +35,7 @@ export class CarParkingComponent extends ParkingBase implements OnInit, OnDestro
     public _toastController: ToastController,
     protected _geolocation: Geolocation,
     protected _nativeGeocoder: NativeGeocoder,
-    protected _network: Network
+    protected _network: Network,
   ) {
     super(_parkingService, _toastController, _geolocation, _nativeGeocoder, _network)
   }
