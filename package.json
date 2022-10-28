@@ -10,18 +10,18 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "add-android":"ionic capacitor add android",
+    "add-android": "ionic capacitor add android",
     "generate-resources": "cordova-res android --skip-config --copy",
     "capacitor-build": "ionic capacitor build android"
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "~11.2.0",
-    "@angular/core": "~11.2.0",
-    "@angular/forms": "~11.2.0",
-    "@angular/platform-browser": "~11.2.0",
-    "@angular/platform-browser-dynamic": "~11.2.0",
-    "@angular/router": "~11.2.0",
+    "@angular/common": "~12.2.16",
+    "@angular/core": "~12.2.16",
+    "@angular/forms": "~12.2.16",
+    "@angular/platform-browser": "~12.2.16",
+    "@angular/platform-browser-dynamic": "~12.2.16",
+    "@angular/router": "~12.2.16",
     "@capacitor/android": "^2.4.7",
     "@capacitor/core": "2.4.7",
     "@ionic-native/core": "^5.32.1",
@@ -34,14 +34,14 @@
     "cordova-plugin-network-information": "^3.0.0",
     "rxjs": "^6.6.6",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1101.4",
-    "@angular/cli": "~11.1.4",
-    "@angular/compiler": "~11.2.0",
-    "@angular/compiler-cli": "~11.2.0",
-    "@angular/language-service": "~11.2.0",
+    "@angular-devkit/build-angular": "~12.2.18",
+    "@angular/cli": "~12.2.18",
+    "@angular/compiler": "~12.2.16",
+    "@angular/compiler-cli": "~12.2.16",
+    "@angular/language-service": "~12.2.16",
     "@capacitor/cli": "2.4.7",
     "@ionic/angular-toolkit": "^3.1.0",
     "@types/jasmine": "~3.6.0",
@@ -50,7 +50,7 @@
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~6.3.16",
+    "karma": "~6.4.1",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-coverage-istanbul-reporter": "~3.0.2",
@@ -59,7 +59,7 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "typescript": "~4.3.5"
   },
   "description": "Localisation et occupation des parkings publics de Strasbourg"
 }
