@@ -5,8 +5,8 @@ import { ToastController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
-import { Subject, timer } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { from, Observable, Subject, timer } from 'rxjs';
+import { catchError, concatMap, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { ParkingBase } from '@shared/components';
 import { ParkingLocation } from '@shared/entities';
@@ -21,9 +21,9 @@ import { Network } from '@ionic-native/network/ngx';
   styleUrls: ['car-parking.component.scss'],
 })
 export class CarParkingComponent extends ParkingBase implements OnInit, OnDestroy {
-  private parkingStatuses: ParkingLocation[] = [];
   private parkingLocations: ParkingLocation[] = [];
   parkings: ParkingLocation[] = [];
+  parkings$: Observable<ParkingLocation[]>;
   headerTitle: string;
   
   private _unsubscribe = new Subject<void>();
@@ -68,12 +68,7 @@ export class CarParkingComponent extends ParkingBase implements OnInit, OnDestro
   }
 
   ionViewWillEnter() {
-    timer(0, 60000).pipe(
-      tap(() => {
-        this.loadParkings();
-      }),
-      takeUntil(this._unsubscribe)
-    ).subscribe();
+    this.loadParkings();
   }
 
   ionViewWillLeave() {
@@ -81,46 +76,44 @@ export class CarParkingComponent extends ParkingBase implements OnInit, OnDestro
     this._unsubscribe.complete();
   }
 
+  private buildParkings$(currentPosition): Observable<ParkingLocation[]> {
+    return this._parkingService.readParkingStatus()
+    .pipe(
+      map(parkingStatuses => { 
+        const parkings = mapParkingStatus(parkingStatuses)
+        .filter(p => p.id !== null )
+        .map(p => {
+          const parkingLocation = this.findParking(p.id);
+          parkingLocation.availablePlaces = p.availablePlaces;
+          parkingLocation.computedDistance = Spherical.computeDistanceBetween(
+            { lat: parkingLocation.position.latitude, lng: parkingLocation.position.longitude },
+            { lat: currentPosition.coords.latitude, lng: currentPosition.coords.longitude }
+          )
+          return parkingLocation;   
+        });
+        return parkings;
+      })
+    );
+  }
+
+  private getParkings$(): Observable<ParkingLocation[]> {
+    return from(this._geolocation.getCurrentPosition(this.geolocationOptions))
+    .pipe(
+      concatMap(currentPosition => this.buildParkings$(currentPosition)),
+      map(val => val.filter(p => p != null).sort((a, b) => a.computedDistance - b.computedDistance))
+    );
+  }
+
   protected loadParkings(): void {
-    this._geolocation.getCurrentPosition(this.geolocationOptions).then(currentPosition => {
-      this.parkings = [];
-      if (currentPosition) {
-        // this.presentToast('test');
-        this.currentPosition = currentPosition;
-        this._parkingService.readParkingStatus().subscribe(val => {
-          this.parkingStatuses = mapParkingStatus(val);
-
-          const parkings = this.parkingStatuses.map(val => {
-            if (!val.id) return null;
-
-            const parkingLocation = this.findParking(val.id);
-
-            if (parkingLocation) {
-              let parking: ParkingLocation = {
-                id: val.id,
-                name: val.name,
-                availablePlaces: val.availablePlaces,
-                address: parkingLocation.address,
-                position: parkingLocation.position,
-                computedDistance: Spherical.computeDistanceBetween(
-                  { lat: parkingLocation.position.latitude, lng: parkingLocation.position.longitude },
-                  { lat: currentPosition.coords.latitude, lng: currentPosition.coords.longitude }
-                )
-              };
-
-              this.buildAddress(parking)
-
-              return parking;
-            }
-          });
-
-          this.parkings = parkings.filter(p => p != null).sort((a, b) => a.computedDistance - b.computedDistance);
-          return this.parkings;
-        })
-      }
-    }).catch(error => {
-      this.handleError(error);
-    });
+    this.parkings$ = timer(0, 60000).pipe(
+      switchMap(() => {
+        return this.getParkings$();
+      }),
+      takeUntil(this._unsubscribe),
+      catchError(error => {
+        throw new Error(error);
+      })
+    );
   }
 
   findParking(parkingId: string | number): ParkingLocation {

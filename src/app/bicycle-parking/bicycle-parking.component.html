@@ -7,7 +7,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="parking-list" *ngIf="networkAvailable && parkings.length > 0">
+  <div class="parking-list" *ngIf="parkings.length > 0">
     <ion-card *ngFor="let item of parkings">
         <ion-item (click)="showDirection(item)">
           <ion-avatar class="place" slot="start">
