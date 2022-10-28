@@ -7,7 +7,7 @@
     <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
 
-<div class="parking-list" *ngIf="networkAvailable && parkings.length > 0">
+<div class="parking-list" *ngIf="parkings$ | async as parkings; else loading;">
     <ion-card *ngFor="let item of parkings">
         <ion-item (click)="showDirection(item)">
             <ion-avatar class="place" slot="start">
@@ -23,26 +23,28 @@
 </div>
 
 <!-- Skeleton screen -->
-<div *ngIf="parkings.length == 0">
-    <ion-list>
-        <ion-item *ngFor="let i of [1,2,3,4,5]">
-            <ion-avatar slot="start">
-                <ion-skeleton-text animated></ion-skeleton-text>
-            </ion-avatar>
-            <ion-label>
-                <h3>
-                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
-                </h3>
-                <p>
-                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-                </p>
-                <p>
-                    <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-                </p>
-            </ion-label>
-        </ion-item>
-    </ion-list>
-</div>
+<ng-template #loading>
+    <div>
+        <ion-list>
+            <ion-item *ngFor="let i of [1,2,3,4,5]">
+                <ion-avatar slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-avatar>
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </p>
+                    <p>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+</ng-template>
 
 <ion-card class="no-data-card" *ngIf="!networkAvailable">
     <ion-item text-center>
