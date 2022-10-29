@@ -13,22 +13,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  entryComponents: [],
-  imports: [
-    BrowserModule, 
-    SharedModule.forRoot(), 
-    IonicModule.forRoot(), 
-    AppRoutingModule
-  ],
-  providers: [
-    Geolocation, 
-    NativeGeocoder,
-    Network,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        BrowserModule,
+        SharedModule.forRoot(),
+        IonicModule.forRoot(),
+        AppRoutingModule
+    ],
+    providers: [
+        Geolocation,
+        NativeGeocoder,
+        Network,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
