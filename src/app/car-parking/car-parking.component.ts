@@ -111,6 +111,7 @@ export class CarParkingComponent extends ParkingBase implements OnInit, OnDestro
       }),
       takeUntil(this._unsubscribe),
       catchError(error => {
+        this.handleError(error);
         throw new Error(error);
       })
     );
