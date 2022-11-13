@@ -1,11 +1,10 @@
-import { Geolocation, GeolocationOptions } from "@ionic-native/geolocation/ngx";
-import { NativeGeocoder, NativeGeocoderResult } from "@ionic-native/native-geocoder/ngx";
-import { Network } from "@ionic-native/network/ngx";
-import { ModalController, ToastController } from "@ionic/angular";
+import { Geolocation, GeolocationOptions } from '@awesome-cordova-plugins/geolocation/ngx';
+import { NativeGeocoder, NativeGeocoderResult } from '@awesome-cordova-plugins/native-geocoder/ngx';
+import { Network } from '@awesome-cordova-plugins/network/ngx';
+import { ToastController } from "@ionic/angular";
 
 import { ParkingLocation } from "@shared/entities";
 import { ParkingService } from "@shared/services";
-import { InfoPageComponent } from "../modals/info-page.component";
 
 export abstract class ParkingBase {
     parkings: ParkingLocation[] = [];
@@ -19,6 +18,7 @@ export abstract class ParkingBase {
     disconnectSubscription;
     connectSubscription;
     letterStartTitle: string;
+    parkingAddress: {[id: string]: any } = {};
 
     constructor(
         protected _parkingService: ParkingService,
@@ -29,9 +29,6 @@ export abstract class ParkingBase {
     }
 
     protected abstract loadParkings(): void;
-
-    createParking() {
-    }
 
     async presentToast(message: string) {
         const toast = await this._toastController.create({
@@ -50,27 +47,21 @@ export abstract class ParkingBase {
         }, 2000);
     }
 
-    protected buildAddress(parking: ParkingLocation): void {
-        if (parking.address) {
+    public buildAddress(parking: ParkingLocation): void {
+        if (parking.address)
             return;
-        }
 
-        if(parking.position == null) return;
-    
         this._nativeGeocoder.reverseGeocode(parking.position.latitude, parking.position.longitude)
-          .then((results: NativeGeocoderResult[]) =>{
+        .then((results: NativeGeocoderResult[] )=> {
+            if (results.length > 0) {
+                const address = `${results[0].subThoroughfare ?? ''} ${results[0].thoroughfare || ' '} 
+                                ${results[0].locality || ''}, ${results[0].postalCode || ''}`;
     
-          if (results.length == 0) {
-            return;
-          }
-    
-          parking.address = 
-            `${results[0]?.subThoroughfare ?? ''}
-            ${results[0].thoroughfare || ' '}
-            ${results[0].locality || ''},
-            ${results[0].postalCode || ''}`
-        })
-        .catch((error: any) => console.log(error));
+                if (!this.parkingAddress[parking.id]) {
+                    this.parkingAddress[parking.id] = address;
+                }
+            }
+        }).catch(error => { throw new Error(error) });
     }
 
     public showDirection(parking: ParkingLocation): void {

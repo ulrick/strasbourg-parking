@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: BicycleParkingComponent,
     resolve: {
-      parkingLocation: BicycleParkingResolve
+      bycicleParkings: BicycleParkingResolve
     }
   }
 ];
