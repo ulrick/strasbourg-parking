@@ -3,59 +3,60 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-</ion-refresher>
+   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
-<div class="parking-list" *ngIf="parkings$ | async as parkings; else loading;">
-    <ion-card *ngFor="let item of parkings">
-        <ion-item (click)="showDirection(item)">
-            <ion-avatar class="place" slot="start">
-                <p>{{ item.availablePlaces }}</p>
-            </ion-avatar>
-            <ion-label>
-                <h2 class="ion-text-wrap">{{ item.name }}</h2>
-                <p class="place-address">{{ item.address }}</p>
-            </ion-label>
-            <ion-note class="distance" color="warning" slot="end">{{ item.computedDistance | unitConverter }}</ion-note>
-        </ion-item>
-    </ion-card>
-</div>
-
-<!-- Skeleton screen -->
-<ng-template #loading>
-    <div>
-        <ion-list>
-            <ion-item *ngFor="let i of [1,2,3,4,5]">
-                <ion-avatar slot="start">
-                    <ion-skeleton-text animated></ion-skeleton-text>
+    <div class="parking-list" *ngIf="parkings$ | async as parkings; else loading;">
+        <ion-card *ngFor="let item of parkings">
+            <ion-item (click)="showDirection(item)">
+                <ion-avatar class="place" slot="start">
+                    <p>{{ item.availablePlaces }}</p>
                 </ion-avatar>
                 <ion-label>
-                    <h3>
-                        <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
-                    </h3>
-                    <p>
-                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-                    </p>
-                    <p>
-                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-                    </p>
+                    <h2 class="ion-text-wrap place-name">{{ item.name }}</h2>
+                    <p class="place-address">{{ item.address }}</p>
                 </ion-label>
+                <ion-note class="distance" color="warning" slot="end">{{ item.computedDistance | unitConverter }}
+                </ion-note>
             </ion-item>
-        </ion-list>
+        </ion-card>
     </div>
-</ng-template>
 
-<ion-card class="no-data-card" *ngIf="!networkAvailable">
-    <ion-item text-center>
-        <p>Vérifier votre connexion internet et activer votre position GPS...</p>
-        <ion-spinner color="secondary" name="lines"></ion-spinner>
-    </ion-item>
+    <!-- Skeleton screen -->
+    <ng-template #loading>
+        <div>
+            <ion-list>
+                <ion-item *ngFor="let i of [1,2,3,4,5,6,7,8]">
+                    <ion-avatar slot="start">
+                        <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-avatar>
+                    <ion-label>
+                        <h3>
+                            <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+                        </h3>
+                        <p>
+                            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                        </p>
+                        <p>
+                            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                        </p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ng-template>
 
-    <ion-item>
-        <ion-button slot="end" size="small" fill="clear" expand="full" color="secondary" (click)="loadParkings()">
-            Actualiser<ion-icon name="refresh"></ion-icon>
-        </ion-button>
-    </ion-item>
-</ion-card>
+    <ion-card class="no-data-card" *ngIf="!networkAvailable">
+        <ion-item text-center>
+            <p>Vérifier votre connexion internet et activer votre position GPS...</p>
+            <ion-spinner color="secondary" name="lines"></ion-spinner>
+        </ion-item>
+
+        <ion-item>
+            <ion-button slot="end" size="small" fill="clear" expand="full" color="secondary" (click)="loadParkings()">
+                Actualiser<ion-icon name="refresh"></ion-icon>
+            </ion-button>
+        </ion-item>
+    </ion-card>
 </ion-content>

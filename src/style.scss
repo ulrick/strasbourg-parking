@@ -7,15 +7,15 @@
     height: 50px;
   }
   
-  .place-available {
-    font-size: 12px; 
+  .place-address.place-address {
+    font-size: .7rem;
   }
   
-  h2 {
-    font-size: 1.06rem;
+  h2.place-name {
+    font-size: .9rem;
     color: var(--ion-color-danger),
   }
-
+  
   ion-toolbar {
     --background: var(--ion-color-secondary);
     color: #FFF;
@@ -27,7 +27,6 @@
   }
   
   .parking-p{
-    color: #FFF;
     font-size: 4rem;
   }
   
@@ -38,6 +37,7 @@
     border-top-color: var(--ion-color-secondary);
     border-width: 3px;
     border-style: solid;
+    background-color: #fff;
   }
   
   .no-data-card p{
@@ -51,3 +51,12 @@
     margin-left: 5px;
   }
   
+  .toast-card > div{
+    position: absolute;
+    top: 25%;
+    border-color: transparent;
+    border-top-color: var(--ion-color-secondary);
+    border-width: 3px;
+    border-style: solid;
+    background-color: #fff !important;;
+  }

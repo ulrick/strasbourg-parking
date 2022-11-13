@@ -2,27 +2,26 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
-import { from, Observable, Subject, timer } from 'rxjs';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
+import { Network } from '@awesome-cordova-plugins/network/ngx';
+
+import { from, Observable, Subject, throwError, timer } from 'rxjs';
 import { catchError, concatMap, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { ParkingBase } from '@shared/components';
 import { ParkingLocation } from '@shared/entities';
 import { ParkingService } from '@shared/services';
 import { Spherical } from '@shared/utils';
-import { mapParkingLocation, mapParkingStatus } from '@shared/utils/mapper';
-import { Network } from '@ionic-native/network/ngx';
 
 @Component({
   selector: 'app-car-parking',
   templateUrl: 'car-parking.component.html',
-  styleUrls: ['car-parking.component.scss'],
+  styleUrls: [],
 })
 export class CarParkingComponent extends ParkingBase implements OnInit, OnDestroy {
   private parkingLocations: ParkingLocation[] = [];
-  parkings: ParkingLocation[] = [];
   parkings$: Observable<ParkingLocation[]>;
   headerTitle: string;
   
@@ -47,12 +46,10 @@ export class CarParkingComponent extends ParkingBase implements OnInit, OnDestro
 
     this.connectSubscription = this._network.onConnect().subscribe(() => {
       this.networkAvailable = true;
-      this.loadParkings();
     });
 
     if ('parkingLocation' in this._route.snapshot.data) {
-      const parkingLocations = this._route.snapshot.data['parkingLocation'];
-      this.parkingLocations = mapParkingLocation(parkingLocations);
+      this.parkingLocations = this._route.snapshot.data['parkingLocation'];
       this._titleService.setTitle('Opened Car Parkings');
 
       this.headerTitle = 'arkings ouverts';
@@ -77,21 +74,21 @@ export class CarParkingComponent extends ParkingBase implements OnInit, OnDestro
   }
 
   private buildParkings$(currentPosition): Observable<ParkingLocation[]> {
+    this.currentPosition = currentPosition;
     return this._parkingService.readParkingStatus()
     .pipe(
       map(parkingStatuses => { 
-        const parkings = mapParkingStatus(parkingStatuses)
-        .filter(p => p.id !== null )
+        return parkingStatuses
+        .filter(p => p.id !== null)
         .map(p => {
           const parkingLocation = this.findParking(p.id);
           parkingLocation.availablePlaces = p.availablePlaces;
           parkingLocation.computedDistance = Spherical.computeDistanceBetween(
             { lat: parkingLocation.position.latitude, lng: parkingLocation.position.longitude },
             { lat: currentPosition.coords.latitude, lng: currentPosition.coords.longitude }
-          )
-          return parkingLocation;   
+          );
+          return parkingLocation;
         });
-        return parkings;
       })
     );
   }
@@ -112,7 +109,7 @@ export class CarParkingComponent extends ParkingBase implements OnInit, OnDestro
       takeUntil(this._unsubscribe),
       catchError(error => {
         this.handleError(error);
-        throw new Error(error);
+        return throwError(error);
       })
     );
   }
