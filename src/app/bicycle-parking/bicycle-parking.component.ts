@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -19,12 +19,13 @@ import { ParkingBase } from '@shared/components';
   templateUrl: './bicycle-parking.component.html',
   styleUrls: [],
 })
-export class BicycleParkingComponent extends ParkingBase implements OnInit {
+export class BicycleParkingComponent extends ParkingBase implements OnInit, AfterViewInit {
 
   private bicycleParkings: ParkingLocation[] = [];
   private _unsubscribe = new Subject<void>();
   parkings$: Observable<ParkingLocation[]>;
   headerTitle: string;
+  timeoutID;
 
   constructor(
     protected _parkingService: ParkingService,
@@ -46,11 +47,6 @@ export class BicycleParkingComponent extends ParkingBase implements OnInit {
       this.letterStartTitle = 'V';
     }
 
-    for (let index = 0; index < this.bicycleParkings.length; index++) {
-      const parking = this.bicycleParkings[index];
-      this.buildAddress(parking);
-    }
-
     this.disconnectSubscription = this._network.onDisconnect().subscribe(() => {
       this.networkAvailable = false;
     });
@@ -60,11 +56,22 @@ export class BicycleParkingComponent extends ParkingBase implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.timeoutID = setTimeout(() => {
+      for (let index = 0; index < this.bicycleParkings.length; index++) {
+        const parking = this.bicycleParkings[index];
+        this.buildAddress(parking);
+      }
+    }, 3000);
+    
+  }
+
   ngOnDestroy(): void {
     this._unsubscribe.next();
     this._unsubscribe.complete();
     this.disconnectSubscription.unsubscribe();
     this.connectSubscription.unsubscribe();
+    clearTimeout(this.timeoutID);
   }
 
   ionViewWillEnter() {

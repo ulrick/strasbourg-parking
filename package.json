@@ -12,7 +12,8 @@
     "e2e": "ng e2e",
     "add-android": "ionic capacitor add android",
     "generate-resources": "cordova-res android --skip-config --copy",
-    "capacitor-build": "ionic capacitor build android"
+    "capacitor-build": "ionic capacitor build android",
+    "capacitor-generate-resources": "npx capacitor-assets generate --android"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +27,7 @@
     "@awesome-cordova-plugins/native-geocoder": "^6.1.0",
     "@awesome-cordova-plugins/network": "^6.1.0",
     "@capacitor/android": "^3.9.0",
+    "@capacitor/assets": "^2.0.1",
     "@capacitor/core": "^3.9.0",
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/geolocation": "^5.36.0",
