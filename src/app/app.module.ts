@@ -18,8 +18,8 @@ import { SharedModule } from './shared/shared.module';
     ],
     imports: [
         BrowserModule,
-        SharedModule.forRoot(),
         IonicModule.forRoot(),
+        SharedModule.forRoot(),
         AppRoutingModule
     ],
     providers: [

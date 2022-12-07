@@ -57,13 +57,12 @@ export class BicycleParkingComponent extends ParkingBase implements OnInit, Afte
   }
 
   ngAfterViewInit() {
-    this.timeoutID = setTimeout(() => {
-      for (let index = 0; index < this.bicycleParkings.length; index++) {
-        const parking = this.bicycleParkings[index];
-        this.buildAddress(parking);
-      }
-    }, 3000);
-    
+    // this.timeoutID = setTimeout(() => {
+    //   for (let index = 0; index < this.bicycleParkings.length; index++) {
+    //     const parking = this.bicycleParkings[index];
+    //     this.buildAddress(parking);
+    //   }
+    // }, 3000);
   }
 
   ngOnDestroy(): void {
@@ -93,7 +92,8 @@ export class BicycleParkingComponent extends ParkingBase implements OnInit, Afte
           { lat: parking.position.latitude, lng: parking.position.longitude },
           { lat: currentPosition.coords.latitude, lng: currentPosition.coords.longitude }
         );
-        parking.address = this.parkingAddress[parking.id]
+        parking.address = this.parkingAddress[parking.id];
+        this.buildAddress(parking);
         return parking;
       });
 

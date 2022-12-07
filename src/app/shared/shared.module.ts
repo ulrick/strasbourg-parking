@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { InfoPageComponent, ToolbarComponent } from './components';
 
 import { UnitConverterPipe } from './pipes';
@@ -22,6 +23,7 @@ export const MY_FORMATS = {
 @NgModule({
     imports: [
         CommonModule,
+        IonicModule.forRoot(),
     ],
     declarations: [
         UnitConverterPipe,

@@ -15,7 +15,8 @@
           </ion-avatar>
           <ion-label>
             <h2 class="ion-text-wrap place-name">{{ item.name }}</h2>
-            <p class="place-address">{{ parkingAddress[item.id] }}</p>
+            <!-- <p class="place-address">{{ parkingAddress[item.id] }}</p> -->
+            <p class="place-address">{{ item.address }}</p>
           </ion-label>
           <ion-note class="distance" color="warning" slot="end">{{ item.computedDistance | unitConverter }}</ion-note>
         </ion-item>

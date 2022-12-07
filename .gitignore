@@ -31,6 +31,6 @@ npm-debug.log*
 /plugins
 /www
 
-.keystore
-.apk
-captures/
+*.jks
+*.pem
+*.pepk

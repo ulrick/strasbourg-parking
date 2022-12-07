@@ -47,21 +47,23 @@ export abstract class ParkingBase {
         }, 2000);
     }
 
-    public buildAddress(parking: ParkingLocation): void {
+    public async buildAddress(parking: ParkingLocation): Promise<void> {
         if (parking.address)
             return;
+        
+        let address = '';
 
-        this._nativeGeocoder.reverseGeocode(parking.position.latitude, parking.position.longitude)
-        .then((results: NativeGeocoderResult[] )=> {
-            if (results.length > 0) {
-                const address = `${results[0].subThoroughfare ?? ''} ${results[0].thoroughfare || ' '} 
-                                ${results[0].locality || ''}, ${results[0].postalCode || ''}`;
-    
-                if (!this.parkingAddress[parking.id]) {
-                    this.parkingAddress[parking.id] = address;
-                }
+        const results = await this._nativeGeocoder.reverseGeocode(parking.position.latitude, parking.position.longitude);
+        if (results.length > 0) {
+            address = `${results[0].subThoroughfare ?? ''} ${results[0].thoroughfare || ' '} 
+                            ${results[0].locality || ''}, ${results[0].postalCode || ''}`;
+
+            if (!this.parkingAddress[parking.id]) {
+                this.parkingAddress[parking.id] = address;
             }
-        }).catch(error => { throw new Error(error) });
+        }
+
+        parking.address = address;
     }
 
     public showDirection(parking: ParkingLocation): void {

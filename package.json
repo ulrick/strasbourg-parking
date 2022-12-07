@@ -13,6 +13,7 @@
     "add-android": "ionic capacitor add android",
     "generate-resources": "cordova-res android --skip-config --copy",
     "capacitor-build": "ionic capacitor build android",
+    "capacitor-build-prod": "ionic capacitor build android --prod",
     "capacitor-generate-resources": "npx capacitor-assets generate --android"
   },
   "private": true,
